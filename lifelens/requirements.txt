@@ -1,0 +1,16 @@
+streamlit
+qdrant-client
+google-generativeai
+groq
+pydub
+gTTS
+folium
+streamlit-folium
+geopy
+python-dotenv
+pillow
+numpy
+blinker
+altair
+cachetools
+rich

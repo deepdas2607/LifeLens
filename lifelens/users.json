@@ -1,0 +1,20 @@
+{
+  "patient1": {
+    "password": "d4587ea9ead060c13fd994f21ecfa7926272a78854a2c20136b10a3c9e53e71e",
+    "role": "patient",
+    "full_name": "John Doe",
+    "patient_id": "patient_1"
+  },
+  "caretaker1": {
+    "password": "c2e9d9947fd5745e16d6f2ec65cf3449f63a1a228a984c917eee284552ca767a",
+    "role": "caretaker",
+    "full_name": "Mary Smith",
+    "patient_id": "patient_1"
+  },
+  "family1": {
+    "password": "0de502ac9741cf67868b8341dd858ef95822cb80ef8d616916afb6fa1654f85d",
+    "role": "family",
+    "full_name": "Sarah Doe",
+    "patient_id": "patient_1"
+  }
+}
