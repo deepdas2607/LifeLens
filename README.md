@@ -9,7 +9,7 @@ _Addressing Memory Loss • Strengthening Relationships • Enhancing Care_
 [![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20DB-4B0082?logo=qdrant&logoColor=white)](https://qdrant.tech/)
 [![Groq](https://img.shields.io/badge/Groq-LLaMA%203%20Inference-1A73E8?logo=groq&logoColor=white)](https://groq.com/)
 [![Gemini](https://img.shields.io/badge/Gemini-1.5%20Flash-4285F4?logo=google&logoColor=white)](https://aistudio.google.com/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![License](https://img.shields.io/badge/License-FRCRCE-green)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Live%20Demo-brightgreen)](https://lifelens-lls.streamlit.app/)
 
 ---
