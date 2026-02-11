@@ -16,5 +16,17 @@
     "role": "family",
     "full_name": "Sarah Doe",
     "patient_id": "patient_1"
+  },
+  "dd26": {
+    "password": "b3c45be6bf09d73eb347634b69e172f8604286a9077a878514dd1b27ef8930f3",
+    "role": "patient",
+    "full_name": "Deep Das",
+    "patient_id": "patient_2"
+  },
+  "test_patient": {
+    "password": "d3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791",
+    "role": "patient",
+    "full_name": "Test Patient (Mood Demo)",
+    "patient_id": "test_patient_mood_demo"
   }
 }

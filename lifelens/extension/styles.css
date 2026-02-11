@@ -1,0 +1,197 @@
+@import url('memory-styles.css');
+
+:root {
+    --bg-color: #111827;
+    /* Darker, cleaner bg */
+    --card-bg: #1F2937;
+    --primary: #38BDF8;
+    /* Sky Blue - High Contrast on Dark */
+    --text: #F9FAFB;
+    /* Near White */
+    --text-muted: #9CA3AF;
+    --border: #374151;
+    --danger: #EF4444;
+    --header-size: 20px;
+    --text-size: 16px;
+    /* Base size larger */
+}
+
+body {
+    width: 360px;
+    /* Slightly wider */
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-color);
+    color: var(--text);
+    font-size: var(--text-size);
+}
+
+.view {
+    padding: 24px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Accessible Inputs */
+input,
+textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Big Buttons */
+.btn-primary,
+.big-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: #000;
+    /* Black text on blue for contrast */
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.1s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Header */
+header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    /* Separation */
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo-small {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 24px;
+}
+
+/* Tabs - Large Touch Targets */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    padding: 5px;
+    border-radius: 12px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: #000;
+}
+
+/* Actions Grid */
+.actions-grid {
+    margin-bottom: 20px;
+}
+
+.action-card {
+    width: 100%;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    /* Horizontal layout for easier reading */
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 600;
+    justify-content: center;
+}
+
+.action-card .icon {
+    font-size: 24px;
+}
+
+/* Quick Note Section */
+.quick-note {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quick-note textarea {
+    height: 100px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.input-group input {
+    margin-bottom: 0;
+}
+
+/* Status Messages */
+.status-msg {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success {
+    background: rgba(52, 211, 153, 0.2);
+    color: #34D399;
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.2);
+    color: #F87171;
+}

@@ -14,3 +14,11 @@ blinker
 altair
 cachetools
 rich
+requests
+plotly
+pandas
+fastapi
+uvicorn[standard]
+pyjwt
+python-multipart
+

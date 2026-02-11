@@ -1,0 +1,91 @@
+/* Global Dark Theme Variables */
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-color: #f8fafc;
+    --accent-color: #06b6d4;
+    /* Cyan */
+    --accent-glow: 0 0 10px rgba(6, 182, 212, 0.5);
+    --border-radius: 12px;
+}
+
+/* Force Dark Background */
+.stApp {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: var(--text-color);
+}
+
+/* Glassmorphism Cards */
+div[data-testid="stExpander"] {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+div[data-testid="stExpander"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
+}
+
+/* Custom Buttons */
+.stButton>button {
+    background: linear-gradient(90deg, #06b6d4, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+    box-shadow: var(--accent-glow);
+    transform: scale(1.05);
+}
+
+/* Inputs */
+.stTextInput>div>div>input {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
+    color: transparent;
+    background: linear-gradient(90deg, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 800;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #020617;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 20px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background-color: transparent;
+    border-radius: 20px;
+    color: #94a3b8;
+    padding: 8px 16px;
+}
+
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    background-color: rgba(6, 182, 212, 0.2);
+    color: #06b6d4;
+    border: 1px solid #06b6d4;
+}

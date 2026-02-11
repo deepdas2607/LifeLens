@@ -8,13 +8,23 @@ def parse_time_filter(query: str):
     Supported phrases:
     - "yesterday"
     - "today"
+    - "just now" / "recently" / "past hour"
     - "last week" (last 7 days)
     """
     query_lower = query.lower()
     
     now = datetime.datetime.now()
+    now_ts = now.timestamp()
     today_start = datetime.datetime(now.year, now.month, now.day).timestamp()
     
+    if any(phrase in query_lower for phrase in ["just now", "recently", "past hour", "a moment ago"]):
+        # Last 1 hour
+        return {
+            "timestamp": {
+                "gte": int(now_ts - 3600)
+            }
+        }
+
     if "today" in query_lower:
         return {
             "timestamp": {

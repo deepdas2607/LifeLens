@@ -42,7 +42,7 @@ if user["role"] in ["caretaker", "family"] and not patient_id:
     
     if patients:
         for patient in patients:
-            if st.button(f"👤 {patient['full_name']} ({patient['patient_id']})", use_container_width=True):
+            if st.button(f"👤 {patient['full_name']} ({patient['patient_id']})", width="stretch"):
                 set_active_patient(patient['patient_id'])
                 st.rerun()
     else:
@@ -63,14 +63,14 @@ with st.sidebar:
     st.caption(f"Role: {user['role'].title()}")
     st.caption(f"Patient: {patient_id}")
     
-    if st.button("🚪 Logout", use_container_width=True):
+    if st.button("🚺 Logout", width="stretch"):
         from lifelens.auth.session import logout
         logout()
         st.rerun()
     
     # Change patient button for caretaker/family
     if user["role"] in ["caretaker", "family"]:
-        if st.button("🔄 Change Patient", use_container_width=True):
+        if st.button("🔄 Change Patient", width="stretch"):
             from lifelens.auth.session import set_active_patient
             set_active_patient(None)
             st.rerun()
@@ -81,13 +81,28 @@ st.markdown("---")
 # Get client
 client = get_qdrant_client()
 
-# Fetch memories with location
+# Fetch memories with location (excluding agent decisions)
+from qdrant_client.http import models
+
 results = client.scroll(
     collection_name=QDRANT_COLLECTION_NAME,
     limit=1000,
     with_payload=True,
     with_vectors=False,
-    scroll_filter={"must": [{"key": "patient_id", "match": {"value": patient_id}}]}
+    scroll_filter=models.Filter(
+        must=[
+            models.FieldCondition(
+                key="patient_id",
+                match=models.MatchValue(value=patient_id)
+            )
+        ],
+        must_not=[
+            models.FieldCondition(
+                key="type",
+                match=models.MatchValue(value="agent_decision")
+            )
+        ]
+    )
 )[0]
 
 memories_with_location = []
@@ -104,42 +119,68 @@ if not memories_with_location:
 first_loc = memories_with_location[0]["location"]
 m = folium.Map(location=[first_loc["lat"], first_loc["lon"]], zoom_start=12)
 
-# Add markers for each memory
+# Group memories by location to handle overlapping markers
+from collections import defaultdict
+location_groups = defaultdict(list)
+
 for mem in memories_with_location:
     loc = mem["location"]
+    # Round coordinates to group nearby memories (within ~10 meters)
+    loc_key = (round(loc["lat"], 4), round(loc["lon"], 4))
+    location_groups[loc_key].append(mem)
+
+# Add markers with offset for multiple memories at same location
+for loc_key, memories in location_groups.items():
+    base_lat, base_lon = loc_key
     
-    # Create popup content
-    timestamp = datetime.fromtimestamp(mem.get("timestamp", 0)).strftime("%B %d, %Y")
-    
-    popup_html = f"""
-    <div style="width: 200px;">
-        <b>{mem.get('type', 'Memory').upper()}</b><br>
-        <i>{timestamp}</i><br>
-    """
-    
-    if mem.get("caption"):
-        popup_html += f"<p>{mem['caption'][:100]}...</p>"
-    elif mem.get("transcript"):
-        popup_html += f"<p>{mem['transcript'][:100]}...</p>"
-    elif mem.get("content"):
-        popup_html += f"<p>{mem['content'][:100]}...</p>"
-    
-    popup_html += "</div>"
-    
-    # Choose marker color based on type
-    color_map = {
-        "image": "blue",
-        "audio": "green",
-        "text": "orange"
-    }
-    color = color_map.get(mem.get("type"), "gray")
-    
-    folium.Marker(
-        location=[loc["lat"], loc["lon"]],
-        popup=folium.Popup(popup_html, max_width=300),
-        tooltip=f"{mem.get('type', 'Memory').upper()} - {timestamp}",
-        icon=folium.Icon(color=color, icon="info-sign")
-    ).add_to(m)
+    # If multiple memories at same location, add slight offset
+    for idx, mem in enumerate(memories):
+        # Calculate offset (small circle pattern)
+        if len(memories) > 1:
+            import math
+            angle = (2 * math.pi * idx) / len(memories)
+            offset = 0.0002  # About 20 meters
+            lat = base_lat + (offset * math.sin(angle))
+            lon = base_lon + (offset * math.cos(angle))
+        else:
+            lat, lon = base_lat, base_lon
+        
+        # Create popup content
+        timestamp = datetime.fromtimestamp(mem.get("timestamp", 0)).strftime("%B %d, %Y")
+        
+        popup_html = f"""
+        <div style="width: 200px;">
+            <b>{mem.get('type', 'Memory').upper()}</b><br>
+            <i>{timestamp}</i><br>
+        """
+        
+        if mem.get("caption"):
+            popup_html += f"<p>{mem['caption'][:100]}...</p>"
+        elif mem.get("transcript"):
+            popup_html += f"<p>{mem['transcript'][:100]}...</p>"
+        elif mem.get("content"):
+            popup_html += f"<p>{mem['content'][:100]}...</p>"
+        
+        if len(memories) > 1:
+            popup_html += f"<small><i>({idx+1} of {len(memories)} memories here)</i></small>"
+        
+        popup_html += "</div>"
+        
+        # Choose marker color based on type
+        color_map = {
+            "image": "blue",
+            "audio": "green",
+            "text": "orange",
+            "video": "red"
+        }
+        color = color_map.get(mem.get("type"), "gray")
+        
+        folium.Marker(
+            location=[lat, lon],
+            popup=folium.Popup(popup_html, max_width=300),
+            tooltip=f"{mem.get('type', 'Memory').upper()} - {timestamp}",
+            icon=folium.Icon(color=color, icon="info-sign")
+        ).add_to(m)
 
 # Display map
 st_folium(m, width=1200, height=600)
@@ -153,4 +194,5 @@ st.markdown("""
 - 🔵 Blue: Images
 - 🟢 Green: Audio
 - 🟠 Orange: Text
+- 🔴 Red: Videos
 """)

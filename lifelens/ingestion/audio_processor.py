@@ -22,15 +22,26 @@ def process_audio(audio_file):
     # However, Groq python client usually expects a filename or a tuple (filename, file-like)
     # Let's save to temp to be safe and avoid format issues.
     
-    # Determine extension
-    ext = ".wav"
-    if hasattr(audio_file, "name"):
-         _, ext = os.path.splitext(audio_file.name)
-         if not ext: ext = ".wav"
+    # Determine if input is a path or file-like object
+    if isinstance(audio_file, str) and os.path.exists(audio_file):
+        # It's a file path
+        temp_path = audio_file
+        # We don't need to write to a new temp file if it's already a path
+        # But we need to ensure it persists if logic expects a temp file context?
+        # The logic below uses `temp_path`.
+        
+        # Read for extension check if needed, but whisper handles it.
+    else:
+        # It's a Streamlit UploadedFile or BytesIO
+        # Determine extension
+        ext = ".wav"
+        if hasattr(audio_file, "name"):
+             _, ext = os.path.splitext(audio_file.name)
+             if not ext: ext = ".wav"
 
-    with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as temp_audio:
-        temp_audio.write(audio_file.getvalue())
-        temp_path = temp_audio.name
+        with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as temp_audio:
+            temp_audio.write(audio_file.getvalue())
+            temp_path = temp_audio.name
 
     try:
         with open(temp_path, "rb") as file_obj:
@@ -44,20 +55,35 @@ def process_audio(audio_file):
         
         transcript = transcription.text
         
-        # Analyze Sentiment
-        sentiment = "Neutral"
+        # Analyze Mood (more nuanced than basic sentiment)
+        mood = "neutral"
+        mood_confidence = 0.0
         try:
             chat_completion = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=[
-                    {"role": "system", "content": "Classify the sentiment of the following text as exactly one of: Happy, Sad, Angry, Confused, Neutral. Return only the word."},
+                    {"role": "system", "content": """You are an emotion detection AI. Analyze the text and classify the primary mood.
+
+Output ONLY the mood word from this list:
+happy, excited, content, calm, neutral, anxious, confused, sad, angry, depressed, frustrated, lonely, worried
+
+Be sensitive to subtle emotional cues. Consider context and word choice."""},
                     {"role": "user", "content": transcript}
                 ],
-                max_tokens=10
+                max_tokens=10,
+                temperature=0.1
             )
-            sentiment = chat_completion.choices[0].message.content.strip()
+            mood = chat_completion.choices[0].message.content.strip().lower()
+            
+            # Validate mood
+            valid_moods = ["happy", "excited", "content", "calm", "neutral", "anxious", 
+                          "confused", "sad", "angry", "depressed", "frustrated", "lonely", "worried"]
+            if mood not in valid_moods:
+                mood = "neutral"
+                
         except Exception as e:
-            print(f"Sentiment Analysis Failed: {e}")
+            print(f"Mood Analysis Failed: {e}")
+            mood = "neutral"
 
         # Read back for base64
         with open(temp_path, "rb") as f:
@@ -66,8 +92,9 @@ def process_audio(audio_file):
             
         return {
             "transcript": transcript,
-            "sentiment": sentiment,
-            "base64": audio_str
+            "mood": mood,
+            "sentiment": mood.capitalize(),  # Backward compatibility
+            "audio_base64": audio_str
         }
 
     except Exception as e:

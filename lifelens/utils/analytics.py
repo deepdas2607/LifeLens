@@ -1,23 +1,45 @@
 from qdrant_client import QdrantClient
+from qdrant_client.http import models
 from lifelens.config import QDRANT_COLLECTION_NAME
 from datetime import datetime, timedelta
 from collections import Counter
 import pandas as pd
 
-def get_memory_stats(client: QdrantClient, patient_id: str):
+def get_memory_stats(client, patient_id: str):
     """Get comprehensive memory statistics for a patient."""
     
-    # Fetch all memories for patient
+    # Fetch all memories for patient, excluding agent decisions
     results = client.scroll(
         collection_name=QDRANT_COLLECTION_NAME,
         limit=1000,
         with_payload=True,
         with_vectors=False,
-        scroll_filter={"must": [{"key": "patient_id", "match": {"value": patient_id}}]}
+        scroll_filter=models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="patient_id",
+                    match=models.MatchValue(value=patient_id)
+                )
+            ],
+            must_not=[
+                models.FieldCondition(
+                    key="type",
+                    match=models.MatchValue(value="agent_decision")
+                )
+            ]
+        )
     )[0]
     
     if not results:
-        return None
+        return {
+            "total_count": 0,
+            "type_counts": {},
+            "mood_distribution": {},
+            "daily_counts": {},
+            "streak": 0,
+            "recent_count": 0,
+            "memories": []
+        }
     
     # Extract data
     memories = [point.payload for point in results]
