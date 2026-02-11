@@ -301,23 +301,6 @@ start_medication_scheduler.bat
 
 ---
 
-## 🎯 Quick Demo Script (2 Minutes)
-
-**"Let me show you LifeLens in action..."**
-
-1. **[Open Browser Extension]** "Patients can capture memories anywhere on the web"
-2. **[Select text → Save]** "Memories are saved with context and timestamps"
-3. **[Open Streamlit]** "The dashboard provides comprehensive memory management"
-4. **[Upload image]** "AI analyzes images and extracts captions automatically"
-5. **[Search memories]** "Semantic search understands intent, not just keywords"
-6. **[Show medications]** "Track adherence, get reminders, analyze patterns"
-7. **[Show mood tracking]** "Multi-agent system detects risk and provides insights"
-8. **[Login as family]** "Family members can view memories safely"
-
-**"LifeLens combines AI, vector search, and multi-agent coordination to provide comprehensive dementia care support."**
-
----
-
 ## 🏁 Shutdown Services
 
 **To stop all services:**
@@ -326,14 +309,6 @@ start_medication_scheduler.bat
 
 **To restart:**
 - Run `start_complete_demo.bat` again
-
----
-
-## 📚 Additional Documentation
-
-- [EXTENSION_STATUS.md](EXTENSION_STATUS.md) - Extension technical details
-- [README.md](README.md) - Full project documentation
-- [EXTENSION_TROUBLESHOOTING.md](EXTENSION_TROUBLESHOOTING.md) - Detailed troubleshooting
 
 ---
 
