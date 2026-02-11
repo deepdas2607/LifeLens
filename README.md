@@ -4,7 +4,7 @@
 
 > **Because memories deserve to be remembered.**
 
-🔗 **Live Demo:** [https://lifelens-lls.streamlit.app/](https://lifelens-lls.streamlit.app/)
+🔗 **Live Demo:** [https://lifelens-lls.streamlit.app/](https://lifelens-lls.streamlit.app/) (the final version is not deployed, this version is the first prototype that got me shortlisted)
 
 ---
 
