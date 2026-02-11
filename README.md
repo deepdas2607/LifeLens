@@ -1,312 +1,355 @@
-<div align="center">
+# 🧠 **LifeLens**
 
-# 🧠 LifeLens  
 ### **AI-Powered Multimodal Memory Companion for Dementia Care**
 
-_Addressing Memory Loss • Strengthening Relationships • Enhancing Care_
+> **Because memories deserve to be remembered.**
 
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.32+-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20DB-4B0082?logo=qdrant&logoColor=white)](https://qdrant.tech/)
-[![Groq](https://img.shields.io/badge/Groq-LLaMA3%2070B-1A73E8?logo=groq&logoColor=white)](https://groq.com/)
-[![Gemini](https://img.shields.io/badge/Gemini-1.5%20Flash-4285F4?logo=google&logoColor=white)](https://aistudio.google.com/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Status](https://img.shields.io/badge/Live-Demo-brightgreen)](https://lifelens-lls.streamlit.app/)
+🔗 **Live Demo:** [https://lifelens-lls.streamlit.app/](https://lifelens-lls.streamlit.app/)
 
 ---
 
-### **“Because memories deserve to be remembered.”**
+<div align="center">
 
-🔗 **Live Demo:** https://lifelens-lls.streamlit.app/
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.32+-FF4B4B?logo=streamlit\&logoColor=white)](https://streamlit.io/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20DB-4B0082?logo=qdrant\&logoColor=white)](https://qdrant.tech/)
+[![Groq](https://img.shields.io/badge/Groq-LLaMA3%2070B-1A73E8?logo=groq\&logoColor=white)](https://groq.com/)
+[![Gemini](https://img.shields.io/badge/Gemini-1.5%20Flash-4285F4?logo=google\&logoColor=white)](https://aistudio.google.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.128+-009688?logo=fastapi\&logoColor=white)](https://fastapi.tiangolo.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 </div>
 
 ---
 
-## 🌟 Overview
-**LifeLens** is a multimodal AI memory companion designed for dementia and Alzheimer’s patients.  
+## 📌 Table of Contents
+
+* Overview
+* Qdrant at the Core
+* Problem → Solution
+* Core Features
+* Multi-Agent System
+* System Architecture
+* Memory Retrieval Flow
+* Qdrant Collection Design
+* Browser Extension
+* Technology Stack
+* Installation
+* Security & Ethics
+* Limitations
+* Roadmap
+* Stats & Achievements
+
+---
+
+# 🌟 Overview
+
+**LifeLens** is a multimodal AI platform for dementia and Alzheimer’s care.
+
 It builds a **long-term digital memory vault** using:
 
-- Image captioning  
-- Audio transcription  
-- Text notes  
-- Mood detection  
-- People tagging  
-- Location metadata  
-- Milestones  
+📸 Images • 🎤 Audio • 📝 Text • 😊 Mood detection
+👥 People tagging • 📍 Location metadata • ⭐ Milestones
 
-All memories are embedded using **FastEmbed** and stored in **Qdrant**, enabling semantic recall and grounded reasoning with **Groq LLaMA-3**.
+All memories are embedded, stored in **Qdrant**, retrieved via **semantic search**, and reasoned over using **Groq LLaMA-3** inside a **multi-agent orchestration layer**.
 
-LifeLens provides separate portals for:
+LifeLens supports:
 
-- Patients  
-- Caretakers  
-- Family Members  
+• Patients
+• Caretakers
+• Family Members
 
 ---
 
-# 🧩 Why Qdrant Is the Core of LifeLens
+# 💜 Qdrant at the Core of LifeLens
 
-LifeLens uses Qdrant as the backbone for **search**, **memory**, and **recommendation**.
+> **LifeLens is architected around Qdrant—not merely connected to it.**
+> Every memory, mood signal, medication event, alert, and agent decision ultimately flows through Qdrant Cloud.
 
-### 🔍 Multimodal Semantic Search
-- Stores embeddings for image captions, audio transcripts, and text memories  
-- Uses cosine similarity for natural language search  
-- Supports hybrid metadata filters  
+In LifeLens, Qdrant functions as:
 
-### 🧠 Long-Term Memory Storage
-- Every memory persists indefinitely  
-- No contextual forgetting  
-- Enables timeline reconstruction and reminiscence therapy  
-
-### 🎯 Recommendations  
-- Related memories  
-- Time-based clusters  
-- Mood-based associations  
-- Person-based clustering  
-
-### ⚙️ Fast and Scalable
-- Low-latency queries  
-- Instant upserts  
-- Handles thousands of memories per patient  
-
-### 📦 Memory Payload Example
-
-```json
-{
-  "type": "image",
-  "timestamp": 1700000000,
-  "caption": "Man smiling at a beach",
-  "transcript": null,
-  "content": null,
-  "people": ["John"],
-  "mood": "happy",
-  "milestone": true,
-  "location": "Mumbai, India",
-  "lat": 19.076,
-  "lon": 72.8777,
-  "raw_media_b64": "..."
-}
-```
+🧠 the system’s **long-term digital memory**
+🔎 the **semantic recall engine**
+⚡ the **real-time analytics backbone**
+🛡 the **privacy-first data vault**
+🤖 the **grounding layer for multi-agent reasoning**
 
 ---
 
-## 🎯 Key Features
+## 🔍 How LifeLens Uses Qdrant
 
-### 🔐 Security & Roles
-- Patients  
-- Caretakers  
-- Family Members  
-- SHA-256 password hashing  
-- Persistent sessions  
+Every experience is embedded and written into Qdrant:
 
-### 📸 Memory Ingestion
-- Gemini image captioning  
-- Groq Whisper audio transcription  
-- Text memory creation  
-- Mood detection  
-- People tagging  
-- Milestones  
+• photos and captions
+• voice notes
+• daily journals
+• mood signals
+• medication logs
+• therapy sessions
+• agent decisions
 
-### 🔍 AI Retrieval & Reasoning
-- Semantic search (Qdrant)  
-- Voice search  
-- Related memory suggestions  
-- Explainable AI (evidence displayed)  
-- Text-to-speech output  
+When a query or alert occurs:
 
-### 🛡 Caretaker Dashboard
-- Mood trends  
-- Memory analytics  
-- People directory  
-- Exportable memory book  
-- Respond to memory requests  
-
-### 👨‍👩‍👧 Family Portal
-- View-only access  
-- Timeline of milestones  
-- Gallery view  
-- Submit memory requests  
-
-### 🗺 Location Mapping
-- Global memory map  
-- Geocoding search  
-- Color-coded markers  
-
----
-
-# 🏛 System Architecture
-
-## 🛰 High-Level Architecture
+1️⃣ Gemini generates embeddings
+2️⃣ Qdrant performs vector + metadata search
+3️⃣ agents reason only over retrieved payloads
+4️⃣ a Critic validates conclusions
+5️⃣ results are persisted back into Qdrant
 
 ```mermaid
 flowchart LR
-
-UI[Streamlit Web App] --> MP[Memory Processing Layer]
-
-MP --> IMG[Gemini Image Captioning]
-MP --> AUD[Whisper Audio Transcription]
-MP --> TXT[Text Preprocessing]
-
-IMG --> EMB[FastEmbed Embeddings]
-AUD --> EMB
-TXT --> EMB
-
-EMB --> QDR[Qdrant Vector Database]
-
-SRCH[User Search Query] --> QEMB[Query Embedding]
-QEMB --> QDR
-QDR --> RES[Retrieved Memories]
-
-RES --> LLM[Groq LLaMA3 Reasoning]
-LLM --> OUT[Final Response with Evidence and TTS]
+Agent --> QDR[Qdrant Search]
+QDR --> LLM[Groq LLaMA-3]
+LLM --> DEC[Decision]
+DEC --> QDR
 ```
 
 ---
 
-## 🔄 Memory Retrieval Flow
+## ⚡ Why Qdrant Was Chosen
+
+| Requirement          | Qdrant Advantage         |
+| -------------------- | ------------------------ |
+| Hybrid filtering     | Native payload indexes   |
+| Low latency          | Sub-200ms retrieval      |
+| Agent workflows      | Fast read/write cycles   |
+| Healthcare isolation | Patient-scoped queries   |
+| Explainability       | Evidence-first responses |
+| Scalability          | Cloud-ready collections  |
+
+---
+
+## 🛡 Responsible AI Through Retrieval
+
+LifeLens enforces safety using Qdrant:
+
+• LLMs only see retrieved memories
+• alerts always cite evidence
+• family portals are read-only
+• caretaker actions logged
+• audit trails stored
+
+**Without Qdrant’s retrieval-first architecture, this safety model breaks.**
+
+---
+
+# 🎯 Problem → Solution
+
+| Challenge         | LifeLens Solution      |
+| ----------------- | ---------------------- |
+| Memory loss       | Permanent vector store |
+| Caregiver burden  | Monitoring agents      |
+| Mood decline      | Risk alerts            |
+| Medication misses | Smart reminders        |
+| Fragmented care   | Unified system         |
+| Social isolation  | Family portals         |
+
+---
+
+# ✨ Core Features
+
+| Area           | Capabilities               |
+| -------------- | -------------------------- |
+| Memory Capture | Image/audio/text ingestion |
+| Search         | Semantic + filters         |
+| Agents         | Planner-Critic-Executor    |
+| Medication     | Schedules & alerts         |
+| Mood           | Risk detection             |
+| Family         | Read-only access           |
+| Maps           | Location view              |
+| Extension      | Browser capture            |
+
+---
+
+# 🤖 Multi-Agent System
+
+```
+User → Planner → Specialists → Critic → Executor → Response
+                       ↑
+                     Qdrant
+```
+
+Agents include:
+
+Mood • Medication Planner • Adherence • Scheduler
+Analytics • Recommender • Summary • Trigger
+
+---
+
+# 🏗 System Architecture
+
+```mermaid
+flowchart LR
+UI[Streamlit / Extension] --> API[FastAPI]
+API --> AG[Multi-Agent System]
+AG --> EMB[Gemini Embeddings]
+EMB --> QDR[Qdrant]
+
+API --> IMG[Image Processor]
+API --> AUD[Audio Processor]
+API --> TXT[Text Processor]
+
+QDR --> LLM[Groq LLaMA-3]
+LLM --> UI
+```
+
+---
+
+# 🔄 Memory Retrieval Flow
 
 ```mermaid
 flowchart TD
-    QRY[User Query] --> EMBQ[Embed Query]
-    EMBQ --> FILT[Apply Filters: Type, Mood, Date, People]
-    FILT --> QD[Qdrant Search]
-    QD --> TOPK[Top-k Results]
-    TOPK --> LLM[LLM Grounded Answer]
-    LLM --> RESP[Final Answer + Evidence]
+QRY[User Query] --> EMBQ[Embed Query]
+EMBQ --> FILT[Filters]
+FILT --> QDR[Qdrant Search]
+QDR --> TOPK[Top Results]
+TOPK --> LLM[Grounded Answer]
+LLM --> RESP[Evidence + TTS]
 ```
 
 ---
 
-## 🗄 Qdrant Collection Architecture
+# 🗄 Qdrant Collection Design
 
 ```mermaid
 flowchart TD
-
-COL[Lifelens Memory Collection] --> V[384-d Vector]
-
-COL --> P[Payload Schema]
-
-P --> T1[Type]
-P --> TS[Timestamp]
-P --> CAP[Caption / Transcript / Text]
-P --> PPL[People]
-P --> MD[Mood]
-P --> MS[Milestone]
-P --> LOC[Location]
-P --> B64[Base64 Media]
+COL[Lifelens Collection] --> V[Vector]
+COL --> PAY[Payload]
+PAY --> T[Type]
+PAY --> TS[Timestamp]
+PAY --> CAP[Caption/Transcript/Text]
+PAY --> PPL[People]
+PAY --> MD[Mood]
+PAY --> LOC[Location]
+PAY --> MS[Milestone]
 ```
 
 ---
 
-# 🧱 Technology Stack
+# 🌐 Browser Extension
 
-### **Frontend**
-- Streamlit  
-- Custom CSS  
-
-### **AI Models**
-- Gemini 1.5 Flash  
-- Groq Whisper  
-- Groq LLaMA-3  
-- FastEmbed  
-
-### **Vector Database**
-- Qdrant Cloud  
-
-### **Other**
-- geopy  
-- OpenStreetMap  
-- SHA-256 hashing  
-- Base64 media  
+| Feature          | Description   |
+| ---------------- | ------------- |
+| Right-click Save | Capture pages |
+| Popup UI         | Quick notes   |
+| JWT Auth         | Secure        |
+| Offline Queue    | Planned       |
+| Direct API       | Yes           |
 
 ---
 
-# 🚀 Quick Start
+# 🛠 Technology Stack
+
+### Frontend
+
+| Tool      | Role      |
+| --------- | --------- |
+| Streamlit | Dashboard |
+| Plotly    | Charts    |
+| Folium    | Maps      |
+
+### Backend
+
+| Tool    | Role   |
+| ------- | ------ |
+| FastAPI | APIs   |
+| JWT     | Auth   |
+| Uvicorn | Server |
+
+### AI
+
+| Model        | Use                 |
+| ------------ | ------------------- |
+| Gemini       | Vision + embeddings |
+| Groq Whisper | Audio               |
+| LLaMA-3      | Agents              |
+
+### Database
+
+| Tool         | Role      |
+| ------------ | --------- |
+| Qdrant Cloud | Vector DB |
+
+---
+
+# 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/lifelens.git
+git clone <repo>
 cd lifelens
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-### 🔐 Add Secrets
+`.env`
 
-Create this file: `/.streamlit/secrets.toml`
-
-```toml
-QDRANT_URL = "..."
-QDRANT_API_KEY = "..."
-GROQ_API_KEY = "..."
-GEMINI_API_KEY = "..."
+```env
+QDRANT_URL=
+QDRANT_API_KEY=
+GEMINI_API_KEY=
+GROQ_API_KEY=
+JWT_SECRET=
+NTFY_TOPIC_URL=
 ```
 
-Deploy to Streamlit Cloud and paste the same secrets.
+---
+
+# 🔐 Security & Ethics
+
+• SHA-256 hashing
+• JWT auth
+• RBAC
+• HTTPS
+• Evidence-based AI
+• Assistive, not diagnostic
 
 ---
 
-# ⚠ Limitations & Ethics
+# ⚠ Limitations
 
-LifeLens is designed for healthcare & accessibility, which requires careful responsibility.  
-Below are the **transparent limitations and ethical considerations**, as required by the Qdrant Convolve 4.0 guidelines.
-
----
-
-## 🔸 **Technical Limitations**
-- **No face recognition** (privacy-first) — people tagging is manual  
-- **Mobile responsiveness limited** due to Streamlit constraints  
-- **Large base64 media payloads** may increase Qdrant storage usage  
-- **Audio sentiment detection** may occasionally misclassify mood  
-- **No offline mode** (cloud-only system)  
+• No face recognition
+• Mobile UI limited
+• Offline mode pending
+• Video ingestion pending
+• Multilingual coming
 
 ---
 
-## 🔸 **Memory & Retrieval Limitations**
-- Memories cannot yet be merged into "clusters" automatically  
-- Long-term memory does not decay or auto-update  
-- Search quality depends on embedding model (FastEmbed)  
-- No support yet for:
-  - video memories  
-  - multi-language memories  
+# 🚀 Roadmap
+
+Short-term: Mobile • Video • Voice
+Mid-term: Wearables • Telehealth
+Long-term: VR • Trials • Federated ML
 
 ---
 
-## 🔸 **Ethical Considerations**
-### 🛡 **1. Privacy & Consent**
-- All uploaded data is personal and potentially sensitive  
-- Only authenticated roles can access memory  
-- Family members have view-only access to avoid accidental edits  
+# 📊 Stats
 
-### 🧭 **2. Responsible AI**
-- No hallucinations: LLM answers ONLY depend on Qdrant-retrieved memories  
-- Evidence is always shown alongside responses  
-- No predictions or medical advice  
-
-### 🔒 **3. Security**
-- Passwords are SHA-256 hashed  
-- No plaintext storage  
-- No external unverified data ingestion  
-
-### ❤️ **4. Human Impact**
-- LifeLens is assistive, not diagnostic  
-- Designed to support memory and emotional well-being  
-- Encourages family connection rather than replacing caregivers  
+| Metric      | Value     |
+| ----------- | --------- |
+| LOC         | 15k+      |
+| Agents      | 18        |
+| Collections | 9         |
+| Dev Time    | 1 week |
 
 ---
 
-# 🛣 Roadmap
+# 🏆 Achievements
 
-- MFA login  
-- Video memory support  
-- Mobile app (Flutter)  
-- On-device face recognition  
-- Multi-language UI  
-- Auto-generated memory summaries  
+• Qdrant Convolve 4.0
+• Multi-agent healthcare system
+• Open-source
+• Accessibility focus
+• Solo Participant
+
 
 ---
 
 <div align="center">
 
-### ❤️ _LifeLens — Bringing Memories Back to Life._
+### ❤️ LifeLens — Bringing Memories Back to Life
+
+**Helping people remember what matters most.**
+
+Built for **Qdrant Convolve 4.0 Hackathon**
 
 </div>
