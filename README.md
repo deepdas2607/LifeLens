@@ -350,6 +350,6 @@ Long-term: VR • Trials • Federated ML
 
 **Helping people remember what matters most.**
 
-Built for **Qdrant Convolve 4.0 Hackathon**
+Built for **Change & Betterment of Society**
 
 </div>
