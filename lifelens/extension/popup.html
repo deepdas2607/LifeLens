@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLens</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Login View -->
+        <div id="login-view" class="view">
+            <div class="logo">
+                <h2>LifeLens</h2>
+                <p>Memory Assistant</p>
+            </div>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Log In</button>
+            </form>
+            <div id="login-error" class="error"></div>
+        </div>
+
+        <!-- Main View -->
+        <div id="main-view" class="view hidden">
+            <header>
+                <div class="header-top">
+                    <span class="logo-small">LifeLens</span>
+                    <button id="logout-btn" class="btn-icon" title="Logout"
+                        style="font-size: 0.9rem; color: var(--danger);">Logout</button>
+                </div>
+                <div class="user-info">
+                    <!-- Patient info displayed here -->
+                </div>
+            </header>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="capture">Capture</button>
+                <button class="tab-btn" data-tab="recall">Memory Lane</button>
+            </div>
+
+            <!-- Capture Tab -->
+            <div id="capture-tab" class="tab-content active">
+                <div class="quick-note">
+                    <label for="note-input" class="sr-only">Write a memory</label>
+                    <textarea id="note-input" placeholder="Write a memory here..."></textarea>
+
+                    <div class="input-group">
+                        <input type="text" id="tags-input" placeholder="Tags (e.g. Family)">
+                        <input type="text" id="location-input" placeholder="Location">
+                    </div>
+
+                    <button id="save-note-btn" class="btn-primary big-btn">Save Memory</button>
+                </div>
+
+                <div id="status-msg" class="status-msg"></div>
+            </div>
+
+            <!-- Recall Tab -->
+            <div id="recall-tab" class="tab-content">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search your memories...">
+                    <button id="search-btn">🔍</button>
+                </div>
+                <div id="memory-list" class="memory-list">
+                    <!-- Memories injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

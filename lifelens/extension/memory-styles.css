@@ -1,0 +1,76 @@
+/* Memory List */
+.memory-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.memory-item {
+    background: var(--card-bg);
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.memory-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.memory-icon {
+    font-size: 1.2rem;
+}
+
+.memory-type {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: bold;
+}
+
+.memory-content {
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.memory-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.memory-meta span {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* AI Answer */
+.ai-answer {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Loading/Empty States */
+.loading,
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+}
+
+.pending {
+    color: #fbbf24;
+}
